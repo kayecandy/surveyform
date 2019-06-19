@@ -46,6 +46,10 @@ h1,h2,h3,h4,h5,h6{
 	position: relative;
 }
 
+.hidden{
+	display: none;
+}
+
 .z-depth-half{
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06), 0 2px 10px 0 rgba(0, 0, 0, .06) !important;
 }
@@ -151,7 +155,50 @@ h1,h2,h3,h4,h5,h6{
 }
 
 
+.cndce-slider.noUi-target{
+	border: none;
+	background: #eaeaea;
+	border-radius: 1rem;
+}
 
+.cndce-slider .noUi-handle{
+	background: #4182ee;
+    box-shadow: unset;
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+    outline: none;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06), 0 2px 10px 0 rgba(0, 0, 0, .06);
+
+    -webkit-transition: box-shadow 0.3s ease-in-out;
+    -o-transition: box-shadow 0.3s ease-in-out;
+    -moz-transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.cndce-slider .noUi-handle:hover{
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+}
+
+.cndce-slider .noUi-handle::before,
+.cndce-slider .noUi-handle::after{
+	content: unset;
+}
+
+.cndce-slider .noUi-pips{
+	padding-top: 0.22rem;
+	color: #565656;
+	font-size: 80%;
+	line-height: 130%;
+}
+
+.cndce-slider .noUi-marker.noUi-marker-horizontal.noUi-marker-normal {
+    width: 1px;
+}
+
+.cndce-slider .noUi-marker.noUi-marker-horizontal.noUi-marker-large {
+    height: 8px;
+}
 
 
 #cndce-survey-container{
@@ -468,14 +515,22 @@ h1,h2,h3,h4,h5,h6{
 #cndce-questions-container .cndce-question-num label{
 	color: white;
 	font-weight: bold;
-	transform: translateY(0.3rem);
+	-webkit-transform: translateY(0.3rem);
+	   -moz-transform: translateY(0.3rem);
+	    -ms-transform: translateY(0.3rem);
+	     -o-transform: translateY(0.3rem);
+	        transform: translateY(0.3rem);
 	left: 0.3rem;
 	font-size: 0.8rem;
 }
 
 #cndce-questions-container .cndce-question-num input:focus + label,
 #cndce-questions-container .cndce-question-num label.active{
-	transform: translateY(-1rem);
+	-webkit-transform: translateY(-1rem);
+	   -moz-transform: translateY(-1rem);
+	    -ms-transform: translateY(-1rem);
+	     -o-transform: translateY(-1rem);
+	        transform: translateY(-1rem);
 	font-size: 0.8rem;
 }
 
