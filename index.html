@@ -151,24 +151,17 @@
 
 					<div class="cndce-start-survey-col">
 						
+						<div class="mt-3 mb-4">
+							<div>Timeout: <span id="timeout_txt"></span></div>
+
+							<div id="timeout" class="cndce-slider mt-2 mb-5"></div>
+							<input id="project_timeout" type="number" class="hidden">
+							
+							
+						</div>
+
 						<div class="my-3">
-							<div>Timeout</div>
-
-							<div class="row">
-								<div class="col-auto"><span class="font-weight-bold small">0</span></div>
-
-								<div class="col">
-									<div class="range-field">
-									  <input type="range" min="0" max="120" step="6" required />
-									</div>
-								</div>
-
-								<div class="col-auto"><span class="font-weight-bold small">120</span></div>
-							</div>
-							
-
-							
-							
+							<div class="cndce-timeout"></div>
 						</div>
 
 						<div class="my-3">
@@ -426,6 +419,16 @@
 
 	<!-- noUISlider -->
 	<script type="text/javascript" src="./lib/nouislider.min.js"></script>
+
+
+	<!-- Wombat -->
+	<script type="text/javascript">
+		ciTranslations = {
+			date_seconds: 'Seconds',
+			survey_rings: 'Rings'
+		}
+	</script>
+	<script type="text/javascript" src="./lib/wombat/timeout.js"></script>
 
 	<!-- Self -->
 	<script type="text/javascript" src="./script.js"></script>

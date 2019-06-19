@@ -262,6 +262,7 @@ $(function(){
 			})
 	})();
 
+
 	(function initInputDates(){
 		$('input.datepicker')
 			.pickadate({
