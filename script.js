@@ -28,6 +28,7 @@ $(function(){
 
 	var $inputQuestionNum = $('#question-num-input');
 	var $inputResponseTracking = $('#response-tracking-input');
+	var $inputSurveyCreated = $('#survey-created-input');
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
@@ -52,6 +53,11 @@ $(function(){
 		return $template
 			.clone(true)
 			.removeClass('cndce-template');
+	}
+
+	function getFormattedDate(date){
+		// FORMAT - yyyy/mm/dd
+		return date.getFullYear() + '-' + ((date.getMonth() + 1) + '').padStart(2, 0) + '-' + (date.getDate() + '').padStart(2, 0);
 	}
 
 
@@ -214,6 +220,14 @@ $(function(){
 
 		updateQuestions();
 	};
+
+
+	(function initInputSurveyCreated(){
+		$inputSurveyCreated.attr('data-value', getFormattedDate(new Date()));
+		$inputSurveyCreated
+			.addClass('datepicker')
+			.pickadate()
+	})();
 
 	(function initDropZone(){
 
