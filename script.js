@@ -18,6 +18,9 @@
 var CNDCE = {};
 
 $(function(){
+	var DATE_FORMAT = 'yyyy-mm-dd';
+
+
 	var $containerStartSurvey = $('#cndce-start-survey-container');
 	var $containerBasicDetails = $('#cndce-basic-details-container');
 	var $containerQuestions = $('#cndce-questions-container');
@@ -44,7 +47,9 @@ $(function(){
 
 
 	$('input.timepicker').pickatime();
-	$('input.datepicker').pickadate();
+	$('input.datepicker').pickadate({
+		format: DATE_FORMAT
+	});
 
 	$('.mdb-select').materialSelect();
 
@@ -230,7 +235,9 @@ $(function(){
 		$inputSurveyCreated.attr('data-value', getFormattedDate(new Date()));
 		$inputSurveyCreated
 			.addClass('datepicker')
-			.pickadate()
+			.pickadate({
+				format: DATE_FORMAT
+			})
 	})();
 
 	(function initDropZone(){
