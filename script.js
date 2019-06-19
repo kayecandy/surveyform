@@ -41,6 +41,7 @@ $(function(){
 	var $inputSurveySkipLogic = $('#survey-skip-logic-input');
 	var $inputStartDate = $('#start-date-input');
 	var $inputEndDate = $('#end-date-input');
+	var $inputTrunk = $('#trunk_id');
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
@@ -293,6 +294,10 @@ $(function(){
 				format: DATE_FORMAT
 			})
 			.removeAttr('readonly');
+	})();
+
+	(function initInputTrunk(){
+		$('ul.dropdown-content li.active', $inputTrunk.parents('.cndce-select-wrapper')).click();
 	})();
 
 

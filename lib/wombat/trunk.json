@@ -1,0 +1,8 @@
+{
+	"start": {"capacity": 10},
+	"Option 10": {"capacity": 10},
+	"Option 25": {"capacity": 25},
+	"Option 50": {"capacity": 50},
+	"Option 100": {"capacity": 100}
+
+}

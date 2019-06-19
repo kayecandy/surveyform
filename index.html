@@ -139,13 +139,14 @@
 						</div>
 
 						<div class="cndce-select-wrapper">
-							<select id="trunk-input" class="mdb-select md-form" required>
-							  <option value="" disabled selected>Choose your option</option>
-							  <option value="1">Option 1</option>
-							  <option value="2">Option 2</option>
-							  <option value="3">Option 3</option>
+							<select id="trunk_id" class="mdb-select md-form" required>
+							  <option disabled>Choose your option</option>
+							  <option value="Option 10" selected>Option 10</option>
+							  <option value="Option 25">Option 25</option>
+							  <option value="Option 50">Option 50</option>
+							  <option value="Option 100">Option 100</option>
 							</select>
-							<label for="trunk-input" class="mdb-main-label">Trunk</label>
+							<label for="trunk_id" class="mdb-main-label">Trunk</label>
 						</div>
 					</div> <!-- col-4 -->
 
@@ -155,7 +156,7 @@
 							<div>Timeout: <span id="timeout_txt"></span></div>
 
 							<div id="timeout" class="cndce-slider mt-2 mb-5"></div>
-							<input id="project_timeout" type="number" class="hidden">
+							<input id="project_timeout" type="number" class="hidden" value="100">
 							
 							
 						</div>
@@ -165,19 +166,11 @@
 						</div>
 
 						<div class="my-3">
-							<div>Channels</div>
+							<div>Channels: <span id="channel_txt"></span></div>
 
-							<div class="row">
-								<div class="col-auto"><span class="font-weight-bold small">0</span></div>
 
-								<div class="col">
-									<div class="range-field">
-									  <input type="range" min="0" max="20" step="1" required />
-									</div>
-								</div>
-
-								<div class="col-auto"><span class="font-weight-bold small">20</span></div>
-							</div>
+							<div id="channels" class="cndce-slider mt-2 mb-5"></div>
+							<input type="hidden" id="project_channels">
 							
 
 							
@@ -425,10 +418,12 @@
 	<script type="text/javascript">
 		ciTranslations = {
 			date_seconds: 'Seconds',
-			survey_rings: 'Rings'
+			survey_rings: 'Rings',
+			survey_loading: 'Loading...'
 		}
 	</script>
 	<script type="text/javascript" src="./lib/wombat/timeout.js"></script>
+	<script type="text/javascript" src="./lib/wombat/trunk_chan.js"></script>
 
 	<!-- Self -->
 	<script type="text/javascript">
