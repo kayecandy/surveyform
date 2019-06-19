@@ -165,6 +165,11 @@ $(function(){
 
 		// Select first question
 		$('.cndce-question-header:first-child', $questionsHeader).click();
+
+
+		// Response Tracking Question Default
+		$('.cndce-option:last-child', $inputResponseTracking).prop('selected', true);
+		updateSelectValue($inputResponseTracking);
 	}
 
 	function initQuestionDetail(question){
