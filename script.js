@@ -39,6 +39,8 @@ $(function(){
 	var $inputResponseTracking = $('#response-tracking-input');
 	var $inputSurveyCreated = $('#survey-created-input');
 	var $inputSurveySkipLogic = $('#survey-skip-logic-input');
+	var $inputStartDate = $('#start-date-input');
+	var $inputEndDate = $('#end-date-input');
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
@@ -345,6 +347,19 @@ $(function(){
 		}
 	})
 
+	$inputStartDate.change(function(){
+		var startDate = new Date($inputStartDate.pickadate('get'));
+		var endDate = new Date($inputEndDate.pickadate('get'));
+
+		$inputEndDate.pickadate('set', {min: startDate});
+
+		// Empty enddate if it's less than start date
+		if(endDate < startDate){
+			$inputEndDate.pickadate('set', 'clear');
+		}
+
+	})
+
 
 	$btnsFileUpload.siblings('input[type="file"]').change(function(e){
 		if(this.files.length > 0){
@@ -386,7 +401,7 @@ $(function(){
 
 		$formStartSurvey.addClass('was-validated');
 
-		if($formStartSurvey[0].checkValidity() || CNDCE_TEST_MODE){
+		if($formStartSurvey[0].checkValidity() || CNDCE_TEST_MODE != undefined){
 			$containerStartSurvey.addClass('cndce-collapse');
 			$containerBasicDetails.addClass('cndce-show');
 
@@ -399,7 +414,7 @@ $(function(){
 
 		$formBasicDetails.addClass('was-validated');
 
-		if($formBasicDetails[0].checkValidity() || CNDCE_TEST_MODE){
+		if($formBasicDetails[0].checkValidity() || CNDCE_TEST_MODE != undefined){
 			$containerBasicDetails.removeClass('cndce-show');
 			$containerBasicDetails.addClass('cndce-collapse');
 			$containerQuestions.addClass('cndce-show');
