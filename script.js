@@ -174,8 +174,7 @@ $(function(){
 
 
 		// Response Tracking Question Default
-		$('.cndce-option:last-child', $inputResponseTracking).prop('selected', true);
-		updateSelectValue($inputResponseTracking);
+		initInputResponseTracking();
 	}
 
 	function initQuestionDetail(question){
@@ -219,6 +218,11 @@ $(function(){
 		}
 
 		updateQuestions();
+	}
+
+	function initInputResponseTracking(){
+		$('.cndce-option:last-child', $inputResponseTracking).prop('selected', true);
+		updateSelectValue($inputResponseTracking);
 	};
 
 
