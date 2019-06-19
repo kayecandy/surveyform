@@ -275,32 +275,7 @@ $(function(){
 				.prop('required', true)
 
 		}
-	}
-
-	function initInputResponseTracking(){
-		$('.cndce-option:last-child', $inputResponseTracking).prop('selected', true);
-		updateSelectValue($inputResponseTracking);
 	};
-
-
-	(function initInputSurveyCreated(){
-		$inputSurveyCreated.attr('data-value', getFormattedDate(new Date()));
-		$inputSurveyCreated
-			.addClass('datepicker')
-			.pickadate({
-				format: DATE_FORMAT
-			})
-	})();
-
-
-	(function initInputDates(){
-		$('input.datepicker')
-			.pickadate({
-				format: DATE_FORMAT
-			})
-			.removeAttr('readonly');
-	})();
-
 
 	(function initInputSelects(){
 		var $selects = $('.mdb-select');
@@ -311,6 +286,31 @@ $(function(){
 		})
 
 	})();
+
+	(function initInputDates(){
+		$('input.datepicker')
+			.pickadate({
+				format: DATE_FORMAT
+			})
+			.removeAttr('readonly');
+	})();
+
+
+
+	function initInputResponseTracking(){
+		$('.cndce-option:last-child', $inputResponseTracking).prop('selected', true);
+		updateSelectValue($inputResponseTracking);
+	};
+
+
+	(function initInputSurveyCreated(){
+
+		$inputSurveyCreated.pickadate('set', {select: new Date()})
+
+	})();
+
+
+	
 
 	(function initDropZone(){
 
