@@ -535,7 +535,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #cndce-questions-container .cndce-question-num input:not(.search){
-	background: #ffffff78;
+	background: #ffffff78 !important;
 	color: white;
 	border-radius: 0.5rem;
 	border: none;
@@ -578,4 +578,14 @@ h1,h2,h3,h4,h5,h6{
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
+}
+
+#cndce-survey-container .cndce-question-num .cndce-question-input-goto,
+#cndce-survey-container .cndce-question-details:last-child .cndce-question-num .cndce-question-input-goto{
+	display: none;
+
+}
+
+#cndce-survey-container.cndce-survey-skip-enabled .cndce-question-num .cndce-question-input-goto{
+	display: block;
 }

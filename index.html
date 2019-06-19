@@ -204,7 +204,7 @@
 						<div class="mt-5 mb-3">
 							<div class="switch">
 							  <label>
-							    <input type="checkbox">
+							    <input id="survey-skip-logic-input" type="checkbox">
 							    <span class="lever"></span>
 							  	Use Survey Skip logic?
 
@@ -366,7 +366,7 @@
 											  <label>Answer</label>
 											</div>							
 
-											<div class="cndce-question-input cndce-select-wrapper">
+											<div class="cndce-question-input cndce-question-input-goto cndce-select-wrapper">
 												<select class="cndce-questions-list" searchable="Search here..">
 												</select>
 												<label class="mdb-main-label">Go to</label>
@@ -431,6 +431,9 @@
 	<script type="text/javascript" src="./lib/wombat/timeout.js"></script>
 
 	<!-- Self -->
+	<script type="text/javascript">
+		var CNDCE_TEST_MODE = true;
+	</script>
 	<script type="text/javascript" src="./script.js"></script>
 
 

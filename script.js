@@ -20,6 +20,8 @@ var CNDCE = {};
 $(function(){
 	var DATE_FORMAT = 'yyyy-mm-dd';
 
+	var $containerSurvey = $('#cndce-survey-container');
+
 
 	var $containerStartSurvey = $('#cndce-start-survey-container');
 	var $containerBasicDetails = $('#cndce-basic-details-container');
@@ -36,6 +38,7 @@ $(function(){
 	var $inputQuestionNum = $('#question-num-input');
 	var $inputResponseTracking = $('#response-tracking-input');
 	var $inputSurveyCreated = $('#survey-created-input');
+	var $inputSurveySkipLogic = $('#survey-skip-logic-input');
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
@@ -160,7 +163,7 @@ $(function(){
 			// $inputResponseTracking.append('<option class="cndce-option">' + questions[i].name + '</option>');
 
 			var $header = $('<div class="cndce-question-header">' + questions[i].name + '</div>');
-			var $details = initQuestionDetail(questions[i]);
+			var $details = initQuestionDetail(questions[i], i);
 
 			$header.data('$details', $details);
 
@@ -171,11 +174,33 @@ $(function(){
 
 
 		// Init Question Select Options
-		var $select = $('select.cndce-questions-list');
+		var $selects = $('select.cndce-questions-list');
 
-		for(var i=0; i < questions.length; i++){
-			$select.append('<option class="cndce-option">' + questions[i].name + '</option>');
-		}
+		$selects.each(function(){
+			var $select = $(this);
+
+			if($select.parents('.cndce-select-wrapper').hasClass('cndce-question-input-goto')){
+				var iSelectedQuestion = $select.parents('.cndce-question-details').attr('data-iQuestion');
+
+			}
+
+			for(var i=0; i < questions.length; i++){
+				var $option = $('<option class="cndce-option">' + questions[i].name + '</option>');
+
+
+				if(iSelectedQuestion != undefined && i == parseInt(iSelectedQuestion) + 1){
+					$option.prop('selected', true);
+				}
+
+				$select.append($option);
+			}
+
+			if(iSelectedQuestion != undefined){
+				updateSelectValue($select);
+			}
+		})
+
+		
 
 
 		// Select first question
@@ -186,7 +211,7 @@ $(function(){
 		initInputResponseTracking();
 	}
 
-	function initQuestionDetail(question){
+	function initQuestionDetail(question, iQuestion){
 		var $details = getTemplate($questionDetailsTemplate);
 
 		var $questionNumContainer = $('.cndce-question-numpad', $details);
@@ -203,6 +228,9 @@ $(function(){
 			$questionNumContainer.append($questionNumCol);
 
 		}
+
+		// Add question index
+		$details.attr('data-iQuestion', iQuestion);
 
 		$questionDetailsContainer.append($details);
 
@@ -309,6 +337,15 @@ $(function(){
 	})();
 
 
+	$inputSurveySkipLogic.change(function(){
+		if($inputSurveySkipLogic.prop('checked')){
+			$containerSurvey.addClass('cndce-survey-skip-enabled');
+		}else{
+			$containerSurvey.removeClass('cndce-survey-skip-enabled');
+		}
+	})
+
+
 	$btnsFileUpload.siblings('input[type="file"]').change(function(e){
 		if(this.files.length > 0){
 			this.files[0].$cndceInput = $(this).parents('.cndce-upload-wrapper');
@@ -349,7 +386,7 @@ $(function(){
 
 		$formStartSurvey.addClass('was-validated');
 
-		if($formStartSurvey[0].checkValidity()){
+		if($formStartSurvey[0].checkValidity() || CNDCE_TEST_MODE){
 			$containerStartSurvey.addClass('cndce-collapse');
 			$containerBasicDetails.addClass('cndce-show');
 
@@ -362,7 +399,7 @@ $(function(){
 
 		$formBasicDetails.addClass('was-validated');
 
-		if($formBasicDetails[0].checkValidity()){
+		if($formBasicDetails[0].checkValidity() || CNDCE_TEST_MODE){
 			$containerBasicDetails.removeClass('cndce-show');
 			$containerBasicDetails.addClass('cndce-collapse');
 			$containerQuestions.addClass('cndce-show');
