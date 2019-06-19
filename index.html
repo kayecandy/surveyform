@@ -40,23 +40,23 @@
 
 			<div class="scrollbar scrollbar-primary">
 
-				<div class="cndce-start-survey-row row align-items-center">
+				<form class="cndce-start-survey-row row align-items-center">
 					<div class="cndce-start-survey-col">
 
 						<div class="md-form">
-						  <input type="text" id="short-name-input" class="form-control">
+						  <input type="text" id="short-name-input" class="form-control" required>
 						  <label for="short-name-input">Short Name</label>
 						</div>
 
 						<div class="md-form">
-						  <textarea id="description" class="md-textarea form-control" rows="3"></textarea>
+						  <textarea id="description" class="md-textarea form-control" rows="3" required></textarea>
 						  <label for="description">Description</label>
 						</div>
 
 						<div class="row mx-0 align-items-center cndce-num-input">
 							<div class="col pl-0">
 								<div class="md-form">
-								  <input type="number" id="question-num-input" class="form-control" value="5" step="1">
+								  <input type="number" id="question-num-input" class="form-control" value="5" step="1" required>
 								  <label for="question-num-input">Number of Questions</label>
 								</div>
 							</div>
@@ -73,7 +73,7 @@
 						<div class="row mx-0 align-items-center cndce-num-input">
 							<div class="col pl-0">
 								<div class="md-form">
-								  <input type="number" id="response-goal-input" class="form-control" value="250" step="5">
+								  <input type="number" id="response-goal-input" class="form-control" value="250" step="5" required>
 								  <label for="response-goal-input">Response Goal</label>
 								</div>
 							</div>
@@ -102,7 +102,7 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-calendar-alt prefix"></i>
-									<input id="start-date-input" type="date" class="form-control datepicker">
+									<input id="start-date-input" type="date" class="form-control datepicker" required>
 									<label for="start-date-input">Start Date</label>				
 								</div>
 							</div>
@@ -110,7 +110,7 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-clock prefix"></i>
-								  	<input type="text" id="start-time-input" class="form-control timepicker">
+								  	<input type="text" id="start-time-input" class="form-control timepicker" required>
 								  	<label for="start-time-input">Start Time</label>
 								</div>
 							</div>
@@ -120,7 +120,7 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-calendar-alt prefix"></i>
-									<input id="end-date-input" type="date" class="form-control datepicker">
+									<input id="end-date-input" type="date" class="form-control datepicker" required>
 									<label for="end-date-input">End Date</label>				
 								</div>
 							</div>
@@ -128,14 +128,14 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-clock prefix"></i>
-								  	<input type="text" id="end-time-input" class="form-control timepicker">
+								  	<input type="text" id="end-time-input" class="form-control timepicker" required>
 								  	<label for="end-time-input">End Time</label>
 								</div>
 							</div>
 						</div>
 
 						<div class="cndce-select-wrapper">
-							<select id="trunk-input" class="mdb-select md-form">
+							<select id="trunk-input" class="mdb-select md-form" required>
 							  <option value="" disabled selected>Choose your option</option>
 							  <option value="1">Option 1</option>
 							  <option value="2">Option 2</option>
@@ -155,7 +155,7 @@
 
 								<div class="col">
 									<div class="range-field">
-									  <input type="range" min="0" max="120" step="6" />
+									  <input type="range" min="0" max="120" step="6" required />
 									</div>
 								</div>
 
@@ -175,7 +175,7 @@
 
 								<div class="col">
 									<div class="range-field">
-									  <input type="range" min="0" max="20" step="1" />
+									  <input type="range" min="0" max="20" step="1" required />
 									</div>
 								</div>
 
@@ -195,7 +195,7 @@
 
 								<div class="col">
 									<div class="range-field">
-									  <input type="range" min="0" max="200" step="1" />
+									  <input type="range" min="0" max="200" step="1" required />
 									</div>
 								</div>
 
@@ -225,7 +225,7 @@
 							</div>
 						</div>
 					</div> <!-- col-4 -->
-				</div>
+				</form>
 
 				
 
@@ -243,7 +243,7 @@
 
 
 			<div class="scrollbar scrollbar-primary">
-				<div class="cndce-basic-details-row row m-0 py-4 px-5 h-100">
+				<form class="cndce-basic-details-row row m-0 py-4 px-5 h-100">
 
 					<div class="cndce-basic-details-col">
 						<div id="cndce-files-dropzone" class="cndce-dropzone dropzone h-100">
@@ -259,12 +259,12 @@
 
 					<div class="cndce-basic-details-col">
 						<div class="md-form">
-						  <input type="text" id="id" class="form-control">
+						  <input type="text" id="id" class="form-control" required>
 						  <label for="id">Survey ID</label>
 						</div>
 
 						<div class="cndce-select-wrapper">
-							<select id="response-tracking-input" class="mdb-select md-form cndce-questions-list" searchable="Search here..">
+							<select id="response-tracking-input" class="mdb-select md-form cndce-questions-list" searchable="Search here.." required>
 							  <option value="" disabled selected>Choose a question</option>
 							</select>
 							<label for="response-tracking-input" class="mdb-main-label">Response Tracking Question</label>
@@ -273,7 +273,7 @@
 						<div class="cndce-upload-wrapper row align-items-center">
 							<div class="col">
 								<div class="cndce-select-wrapper">
-									<select id="intro-audio-input" class="mdb-select md-form cndce-file-list" searchable="Search here..">
+									<select id="intro-audio-input" class="mdb-select md-form cndce-file-list" searchable="Search here.." required>
 									  <option value="" disabled selected>Choose a file or upload</option>
 									</select>
 									<label for="intro-audio-input" class="mdb-main-label">Intro Audio File</label>
@@ -289,7 +289,7 @@
 						<div class="cndce-upload-wrapper row align-items-center">
 							<div class="col">
 								<div class="cndce-select-wrapper">
-									<select id="hangup-audio-input" class="mdb-select md-form cndce-file-list" searchable="Search here..">
+									<select id="hangup-audio-input" class="mdb-select md-form cndce-file-list" searchable="Search here.." required>
 									  <option value="" disabled selected>Choose a file or upload</option>
 									</select>
 									<label for="hangup-audio-input" class="mdb-main-label">Hangup Audio File</label>
@@ -303,7 +303,7 @@
 					</div> <!-- col-6 -->
 
 					
-				</div>
+				</form>
 			</div>
 
 			<div class="cndce-next-button-container grey lighten-3 text-center">

@@ -25,6 +25,10 @@ $(function(){
 	var $containerBasicDetails = $('#cndce-basic-details-container');
 	var $containerQuestions = $('#cndce-questions-container');
 
+	var $formStartSurvey = $('form.cndce-start-survey-row', $containerStartSurvey);
+	var $formBasicDetails = $('form.cndce-basic-details-row', $containerBasicDetails);
+
+
 	var $questionsHeader = $('#cndce-questions-header');
 	var $questionDetailsContainer = $('.cndce-question-details-container', $containerQuestions);
 	var $questionDetailsTemplate = $('.cndce-question-details.cndce-template', $containerQuestions);
@@ -47,12 +51,8 @@ $(function(){
 
 
 	$('input.timepicker').pickatime();
-	$('input.datepicker').pickadate({
-		format: DATE_FORMAT
-	});
 
-	$('.mdb-select').materialSelect();
-
+	
 
 	function getTemplate($template){
 		return $template
@@ -128,10 +128,14 @@ $(function(){
 			for(var mutation of mutationList){
 				for(addedNode of mutation.addedNodes){
 					if($(addedNode).is('div.select-wrapper')){
+						var $select = $('select', addedNode);
+
+						initInputSelect($select);
+
 						$('ul.dropdown-content li.active', addedNode).click();
 
 						// Another bug - label doesn't go back down when value is empty
-						if(!$('select', addedNode).val()){
+						if(!$select.val()){
 							$(addedNode).siblings('label').removeClass('active');
 						}
 					}
@@ -225,6 +229,24 @@ $(function(){
 		updateQuestions();
 	}
 
+
+	function initInputSelect($select){
+		var $selectWrapper = $select.parents('.cndce-select-wrapper');
+		var $inputSelect = $('input.select-dropdown', $selectWrapper);
+
+		$inputSelect
+			.removeAttr('readonly')
+			.addClass('form-control')
+			.css('background-color', '#fff')
+			.attr('placeholder', $('.mdb-main-label', $selectWrapper).text())
+
+		if($select.prop('required')){
+			$inputSelect
+				.prop('required', true)
+
+		}
+	}
+
 	function initInputResponseTracking(){
 		$('.cndce-option:last-child', $inputResponseTracking).prop('selected', true);
 		updateSelectValue($inputResponseTracking);
@@ -238,6 +260,25 @@ $(function(){
 			.pickadate({
 				format: DATE_FORMAT
 			})
+	})();
+
+	(function initInputDates(){
+		$('input.datepicker')
+			.pickadate({
+				format: DATE_FORMAT
+			})
+			.removeAttr('readonly');
+	})();
+
+
+	(function initInputSelects(){
+		var $selects = $('.mdb-select');
+		$selects.materialSelect();
+
+		$selects.each(function(){
+			initInputSelect($(this));
+		})
+
 	})();
 
 	(function initDropZone(){
@@ -304,16 +345,28 @@ $(function(){
 
 
 	$btnGenerateSurvey.click(function(){
-		$containerStartSurvey.addClass('cndce-collapse');
-		$containerBasicDetails.addClass('cndce-show');
 
-		initQuestions();
+		$formStartSurvey.addClass('was-validated');
+
+		if($formStartSurvey[0].checkValidity()){
+			$containerStartSurvey.addClass('cndce-collapse');
+			$containerBasicDetails.addClass('cndce-show');
+
+			initQuestions();
+		}
+		
 	})
 
 	$btnEditQuestions.click(function(){
-		$containerBasicDetails.removeClass('cndce-show');
-		$containerBasicDetails.addClass('cndce-collapse');
-		$containerQuestions.addClass('cndce-show');
+
+		$formBasicDetails.addClass('was-validated');
+
+		if($formBasicDetails[0].checkValidity()){
+			$containerBasicDetails.removeClass('cndce-show');
+			$containerBasicDetails.addClass('cndce-collapse');
+			$containerQuestions.addClass('cndce-show');
+		}
+		
 	})
 
 

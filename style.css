@@ -64,6 +64,10 @@ h1,h2,h3,h4,h5,h6{
 	white-space: nowrap;
 }
 
+.was-validated .cndce-select-wrapper input.search{
+	background: none;
+	border-bottom: initial;
+}
 
 
 .cndce-template{
