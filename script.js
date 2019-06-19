@@ -42,6 +42,7 @@ $(function(){
 	var $inputStartDate = $('#start-date-input');
 	var $inputEndDate = $('#end-date-input');
 	var $inputTrunk = $('#trunk_id');
+	var $inputVolume = $('#volume-input');
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
@@ -298,6 +299,23 @@ $(function(){
 
 	(function initInputTrunk(){
 		$('ul.dropdown-content li.active', $inputTrunk.parents('.cndce-select-wrapper')).click();
+	})();
+
+	(function initInputVolume(){
+		noUiSlider.create($inputVolume[0], {
+			start: 100, 
+			step: 1,
+			range: {
+				'min': 0,
+				'max': 200
+			},
+			pips: { // Show a scale with the slider
+				mode: 'values',
+				stepped: true,
+				density: 5,
+				values: [1,25,50,75,100,125,150,175,200]
+			},
+		});
 	})();
 
 
