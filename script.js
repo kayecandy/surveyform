@@ -43,6 +43,7 @@ $(function(){
 	var $inputEndDate = $('#end-date-input');
 	var $inputTrunk = $('#trunk_id');
 	var $inputVolume = $('#volume-input');
+	var $inputSurveyID = $('#id-input')
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
@@ -330,6 +331,11 @@ $(function(){
 
 		$inputSurveyCreated.pickadate('set', {select: new Date()})
 
+	})();
+
+	(function initSurveyID(){
+		$inputSurveyID.val((Math.random() * 1000000).toFixed(0));
+		$inputSurveyID.trigger('change');
 	})();
 
 
