@@ -57,7 +57,6 @@ $(function(){
 	var questions = [];
 	var files = [];
 
-
 	$('input.timepicker').pickatime();
 
 	
@@ -352,6 +351,11 @@ $(function(){
 
 		dropzone.on('addedfile', function(file, response, e, f){
 			addFile(file);
+
+			// Change icon for non-images
+			if(!file.type.match(/image.*/)){
+				dropzone.emit('thumbnail', file, './assets/icon-audio.svg');
+			}
 		})
 
 		dropzone.on('removedfile', function(file){
@@ -455,6 +459,17 @@ $(function(){
 			$containerQuestions.addClass('cndce-show');
 		}
 		
+	})
+
+	$containerBasicDetails.on('dragenter', function(e){
+
+		$containerBasicDetails.addClass('dragenter');
+
+	})
+
+	$inputFilesDropzone.on('dragleave drop', function(e){
+		$containerBasicDetails.removeClass('dragenter');
+
 	})
 
 
