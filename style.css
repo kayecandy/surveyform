@@ -417,6 +417,7 @@ h1,h2,h3,h4,h5,h6{
 	font-weight: normal;
 	letter-spacing: 0.1rem;
 	cursor: pointer;
+	min-height: 5rem;
 
 	-webkit-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
@@ -437,6 +438,9 @@ h1,h2,h3,h4,h5,h6{
 	   -moz-box-pack: center;
 	    -ms-flex-pack: center;
 	        justify-content: center;
+	-webkit-flex-shrink: 0;
+	    -ms-flex-negative: 0;
+	        flex-shrink: 0;
 	-webkit-box-flex: 1;
 	-webkit-flex-grow: 1;
 	   -moz-box-flex: 1;
