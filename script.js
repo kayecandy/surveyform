@@ -434,6 +434,12 @@ $(function(){
 			$containerStartSurvey.addClass('cndce-collapse');
 			$containerBasicDetails.addClass('cndce-show');
 
+			// Disable Number of Questions input
+			var $btnsQuestionNum = $('button', $inputQuestionNum.parents('.cndce-num-input'));
+
+			$inputQuestionNum.prop('disabled', true);
+			$btnsQuestionNum.prop('disabled', true);
+
 			initQuestions();
 		}
 		
