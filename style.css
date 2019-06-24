@@ -244,6 +244,12 @@ background-color: #e2e2e2; }
 	background: none;
 }
 
+.dropzone .dz-preview .dz-error-message{
+	width: 100%;
+	top: 100%;
+	left: 0;
+}
+
 
 .cndce-slider.noUi-target{
 	border: none;
