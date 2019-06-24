@@ -48,19 +48,19 @@
 					<div class="cndce-start-survey-col">
 
 						<div class="md-form">
-						  <input type="text" id="short-name-input" class="form-control" required>
+						  <input type="text" id="short-name-input" class="cndce-input form-control" required>
 						  <label for="short-name-input">Short Name</label>
 						</div>
 
 						<div class="md-form">
-						  <textarea id="description" class="md-textarea form-control" rows="3"></textarea>
-						  <label for="description">Description</label>
+						  <textarea id="description-input" class="cndce-input md-textarea form-control" rows="3"></textarea>
+						  <label for="description-input">Description</label>
 						</div>
 
 						<div class="row mx-0 align-items-center cndce-num-input">
 							<div class="col pl-0">
 								<div class="md-form">
-								  <input type="number" id="question-num-input" class="form-control" value="5" step="1" min="1" required>
+								  <input type="number" id="question-num-input" class="cndce-input form-control" value="5" step="1" min="1" required>
 								  <label for="question-num-input">Number of Questions</label>
 								</div>
 							</div>
@@ -77,7 +77,7 @@
 						<div class="row mx-0 align-items-center cndce-num-input">
 							<div class="col pl-0">
 								<div class="md-form">
-								  <input type="number" id="response-goal-input" class="form-control" value="250" step="5" min="0" required>
+								  <input type="number" id="response-goal-input" class="cndce-input form-control" value="250" step="5" min="0" required>
 								  <label for="response-goal-input">Response Goal</label>
 								</div>
 							</div>
@@ -97,7 +97,7 @@
 
 						<div class="md-form form-sm py-1 grey-text">
 							<i class="fas fa-calendar-alt prefix grey-text"></i>
-							<input id="survey-created-input" type="date" class="form-control datepicker" disabled>
+							<input id="survey-created-input" type="date" class="cndce-input form-control datepicker" disabled>
 							<label for="survey-created-input" class="active">Survey Created</label>				
 						</div>
 
@@ -106,7 +106,7 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-calendar-alt prefix"></i>
-									<input id="start-date-input" type="date" class="form-control datepicker" required>
+									<input id="start-date-input" type="date" class="cndce-input form-control datepicker" required>
 									<label for="start-date-input">Start Date</label>				
 								</div>
 							</div>
@@ -114,7 +114,7 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-clock prefix"></i>
-								  	<input type="text" id="start-time-input" class="form-control timepicker" required>
+								  	<input type="text" id="start-time-input" class="cndce-input form-control timepicker" required>
 								  	<label for="start-time-input">Start Time</label>
 								</div>
 							</div>
@@ -124,7 +124,7 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-calendar-alt prefix"></i>
-									<input id="end-date-input" type="date" class="form-control datepicker" required>
+									<input id="end-date-input" type="date" class="cndce-input form-control datepicker" required>
 									<label for="end-date-input">End Date</label>				
 								</div>
 							</div>
@@ -132,14 +132,14 @@
 							<div class="col">
 								<div class="md-form form-sm">
 									<i class="fas fa-clock prefix"></i>
-								  	<input type="text" id="end-time-input" class="form-control timepicker" required>
+								  	<input type="text" id="end-time-input" class="cndce-input form-control timepicker" required>
 								  	<label for="end-time-input">End Time</label>
 								</div>
 							</div>
 						</div>
 
 						<div class="cndce-select-wrapper">
-							<select id="trunk_id" class="mdb-select md-form" required>
+							<select id="trunk_id" class="cndce-input mdb-select md-form" required>
 							  <option disabled>Choose your option</option>
 							  <option value="Option 10" selected>Option 10</option>
 							  <option value="Option 25">Option 25</option>
@@ -156,7 +156,7 @@
 							<div>Timeout: <span id="timeout_txt"></span></div>
 
 							<div id="timeout" class="cndce-slider mt-2 mb-5"></div>
-							<input id="project_timeout" type="number" class="hidden" value="100">
+							<input id="project_timeout" type="number" class="cndce-input hidden" value="100">
 							
 							
 						</div>
@@ -166,7 +166,7 @@
 
 
 							<div id="channels" class="cndce-slider mt-2 mb-5"></div>
-							<input type="hidden" id="project_channels">
+							<input type="hidden" id="project_channels" class="cndce-input">
 							
 
 							
@@ -176,14 +176,16 @@
 						<div class="mt-3 mb-4">
 							<div>Audio Volume</div>
 
-							<div id="volume-input" class="cndce-slider mt-2 mb-5"></div>
+							<div id="volume-slider" class="cndce-slider mt-2 mb-5"></div>
+
+							<input type="hidden" id="volume-input" class="cndce-input">
 							
 						</div>
 
 						<div class="mt-5 mb-3">
 							<div class="switch">
 							  <label>
-							    <input id="survey-skip-logic-input" type="checkbox">
+							    <input id="survey-skip-logic-input" type="checkbox" class="cndce-input" data-checked-value="Yes" data-unchecked-value="No">
 							    <span class="lever"></span>
 							  	Use Survey Skip logic?
 
@@ -194,7 +196,7 @@
 						<div class="my-3">
 							<div class="switch">
 							  <label>
-							    <input type="checkbox">
+							    <input id="amd-input" class="cndce-input" type="checkbox" data-checked-value="Yes" data-unchecked-value="No">
 							    <span class="lever"></span>
 							  	Enable AMD?
 							  </label>
@@ -208,7 +210,7 @@
 			</div> <!-- scrollbar -->
 
 			<div class="cndce-next-button-container grey lighten-3">
-				<button id="cndce-generate-survey-button" class="btn btn-primary semi-rounded font-weight-bold m-0">Generate Survey</button>
+				<button id="cndce-generate-survey-button" class="btn btn-primary semi-rounded font-weight-bold m-0 animated fast">Generate Survey</button>
 			</div>
 		</div> <!-- #cndce-start-survey-container -->
 
@@ -225,12 +227,12 @@
 					<div class="cndce-basic-details-col">
 
 						<div class="md-form">
-						  <input type="text" id="id-input" class="form-control" required disabled>
+						  <input type="text" id="id-input" class="cndce-input form-control" required disabled>
 						  <label for="id-input">Survey ID</label>
 						</div>
 
 						<div class="cndce-select-wrapper">
-							<select id="response-tracking-input" class="mdb-select md-form cndce-questions-list" searchable="Search here.." required>
+							<select id="response-tracking-input" class="cndce-input mdb-select md-form cndce-questions-list" searchable="Search here.." required>
 							  <option value="" disabled selected>Choose a question</option>
 							</select>
 							<label for="response-tracking-input" class="mdb-main-label">Response Tracking Question</label>
@@ -239,7 +241,7 @@
 						<div class="cndce-upload-wrapper row align-items-center">
 							<div class="col">
 								<div class="cndce-select-wrapper">
-									<select id="intro-audio-input" class="mdb-select md-form cndce-file-list" searchable="Search here.." required>
+									<select id="intro-audio-input" class="cndce-input mdb-select md-form cndce-file-list" searchable="Search here.." required>
 									  <option value="" disabled selected>Choose a file or upload</option>
 									</select>
 									<label for="intro-audio-input" class="mdb-main-label">Intro Audio File</label>
@@ -255,7 +257,7 @@
 						<div class="cndce-upload-wrapper row align-items-center">
 							<div class="col">
 								<div class="cndce-select-wrapper">
-									<select id="hangup-audio-input" class="mdb-select md-form cndce-file-list" searchable="Search here..">
+									<select id="hangup-audio-input" class="cndce-input mdb-select md-form cndce-file-list" searchable="Search here..">
 									  <option value="" disabled selected>Choose a file or upload</option>
 									</select>
 									<label for="hangup-audio-input" class="mdb-main-label">Hangup Audio File</label>
@@ -285,8 +287,8 @@
 				</form>
 			</div>
 
-			<div class="cndce-next-button-container grey lighten-3 text-center">
-				<button id="cndce-edit-questions-button" class="btn btn-primary semi-rounded font-weight-bold m-0 text-nowrap">Edit Questions</button>
+			<div class="cndce-next-button-container col-auto py-2 grey lighten-3 text-center">
+				<button id="cndce-edit-questions-button" class="btn btn-primary semi-rounded font-weight-bold m-0 text-nowrap animated">Edit Questions</button>
 			</div>
 		</div>
 
@@ -300,72 +302,265 @@
 						</div>
 					</div>
 				</div>
-				<div class="col p-0">
+				<div class="col p-0 d-flex flex-column">
 
 					<div class="scrollbar scrollbar-primary">
 						<div class="cndce-question-details-container py-2 px-5">
 							<div class="cndce-question-details cndce-template">
-								<div class="md-form">
-								  <input type="text" class="form-control">
-								  <label>Survey ID</label>
-								</div>
+								<form class="cndce-question-details-form">
+									<div class="md-form">
+									  <input id="question-label-input" type="text" class="cndce-input form-control" required>
+									  <label for="question-label-input">Question Label</label>
+									</div>
 
-								<div class="md-form">
-								  <input type="text" class="form-control">
-								  <label>Question (Prompt)</label>
-								</div>
+									<div class="md-form">
+									  <input id="question-prompt-input" type="text" class="cndce-input form-control" required>
+									  <label for="question-prompt-input">Question (Prompt)</label>
+									</div>
 
-								<div class="md-form">
-								  <input type="text" class="form-control">
-								  <label>Question Label</label>
-								</div>
+									
 
-								<div class="cndce-upload-wrapper row align-items-center">
-									<div class="col">
-										<div class="cndce-select-wrapper">
-											<select class="md-form cndce-file-list" searchable="Search here..">
-											  <option value="" disabled selected>Choose a file or upload</option>
-											</select>
-											<label class="mdb-main-label">Question Audio File</label>
+									<div class="cndce-upload-wrapper row align-items-center">
+										<div class="col">
+											<div class="cndce-select-wrapper">
+												<select id="question-audio-input" class="cndce-input md-form cndce-file-list" searchable="Search here.." required>
+												  <option value="" disabled selected>Choose a file or upload</option>
+												</select>
+												<label class="mdb-main-label">Question Audio File</label>
+											</div>
+										</div>
+										<div class="col-auto">
+											<input type="file" style="display: none;">
+											<button type="button" class="cndce-upload-button btn grey lighten-2 px-3 rounded"><i class="fas fa-upload"></i></button>
 										</div>
 									</div>
-									<div class="col-auto">
-										<input type="file" style="display: none;">
-										<button type="button" class="cndce-upload-button btn grey lighten-2 px-3 rounded"><i class="fas fa-upload"></i></button>
-									</div>
-								</div>
 
-								<small class="font-italic text-primary">Click on a number to activate/deactivate DTMF</small>
+									<small class="font-italic text-primary">Click on a number to activate/deactivate DTMF</small>
 
 
-								<div class="cndce-question-numpad row mt-4">
+									<div class="cndce-question-numpad row mt-4">
 
-									<div class="cndce-question-num-col cndce-template col-4 p-2">
-										<div class="cndce-question-num">
-											<h1 class="cndce-num">1</h1>	
-											<div class="cndce-question-input md-form form-sm">
-											  <input type="text" class="form-control">
-											  <label>Answer</label>
-											</div>							
+										<div class="cndce-question-num-col cndce-template col-4 p-2">
+											<div class="cndce-question-num">
+												<h1 class="cndce-num">1</h1>	
+												<div class="cndce-question-input md-form form-sm">
+												  <input id="question-answer-input" type="text" class="cndce-input form-control question-answer-input">
+												  <label for="question-answer-input">Answer</label>
+												</div>							
 
-											<div class="cndce-question-input cndce-question-input-goto cndce-select-wrapper">
-												<select class="cndce-questions-list" searchable="Search here..">
-												</select>
-												<label class="mdb-main-label">Go to</label>
+												<div class="cndce-question-input cndce-question-input-goto cndce-select-wrapper">
+													<select id="question-goto-input" class="cndce-input cndce-questions-list" searchable="Search here..">
+													</select>
+													<label class="mdb-main-label">Go to</label>
+												</div>
 											</div>
 										</div>
 									</div>
+								</form>
+								
 							</div> <!-- cndce-question-details -->
 						</div>
+
 					</div>
 
+
+					<div class="px-3 py-1 grey lighten-3 text-right">
+						<button id="cndce-preview-button" class="btn btn-primary semi-rounded font-weight-bold w-100 animated">Preview and Submit</button>
+					</div>
 					
 
 
 
 				</div>
+			</div>	
+		</div>
+
+		<div id="cndce-preview-container" class="p-5">
+			<div class="container">
+
+				<h1 class="mb-5"><button id="cndce-preview-back-button" class="btn btn-primary semi-rounded px-3"><i class="fas fa-chevron-left"></i></button> Survey ID #<span class="cndce-value" data-for="id-input"></span></h1>
+
+				<div class="z-depth-half semi-rounded px-5 py-4 mt-4">
+
+					<h3>Basic Details</h3>
+					
+					<div class="row mt-4">
+						<div class="col">
+
+							<div class="my-2">
+								<div><b>Survey Created</b></div>
+								<div class="cndce-value" data-for="survey-created-input"></div>
+							</div>
+
+							<div class="my-2">
+								<div><b>Suvery Start Date</b></div>
+								<div><span class="cndce-value" data-for="start-date-input"></span> <span class="cndce-value" data-for="start-time-input"></span></div>
+							</div>
+
+							<div class="my-2">
+								<div><b>Suvery End Date</b></div>
+								<div><span class="cndce-value" data-for="end-date-input"></span> <span class="cndce-value" data-for="end-time-input"></span></div>
+							</div>
+						</div> <!-- col -->
+
+						<div class="col">
+							<div class="my-2">
+								<div><b>Survey Short Name</b></div>
+								<div class="cndce-value" data-for="short-name-input"></div>
+							</div>
+
+							<div class="my-2">
+								<div><b>Survey Description</b></div>
+								<div class="cndce-value" data-for="description-input"></div>
+							</div>
+
+							<div class="my-2">
+								<div><b>Number of Questions</b></div>
+								<div class="cndce-value" data-for="question-num-input"></div>
+							</div>
+						</div> <!-- col -->
+
+						<div class="col">
+							<div class="my-2">
+								<div><b>Response Goal</b></div>
+								<div class="cndce-value" data-for="response-goal-input"></div>
+							</div>
+
+							<div class="my-2">
+								<div><b>Audio Volume</b></div>
+								<div><span class="cndce-value" data-for="volume-input"></span>%</div>
+							</div>
+
+							<div class="my-2">
+								<div><b>Timeout</b></div>
+								<div><span class="cndce-value" data-for="project_timeout"></span> seconds</div>
+							</div>
+						</div> <!-- col -->
+					</div> <!-- row -->
+
+					<hr>
+
+					<div class="row">
+						<div class="col text-nowrap">
+							<i class="cndce-icon fas fa-random text-primary"></i>
+
+							<div class="d-inline-block">
+								<div><b>Use Survey Skip Logic?</b></div>
+								<div class="cndce-value" data-for="survey-skip-logic-input"></div>
+							</div>
+						</div>
+
+						<div class="col text-nowrap">
+							<i class="cndce-icon far fa-question-circle text-primary"></i>
+
+							<div class="d-inline-block">
+								<div><b>Use AMD?</b></div>
+								<div class="cndce-value" data-for="amd-input"></div>
+
+							</div>
+						</div>
+
+						<div class="col text-nowrap">
+							<i class="cndce-icon fas fa-bezier-curve text-primary"></i>
+
+							<div class="d-inline-block">
+								<div><b>Channels</b></div>
+								<div class="cndce-value" data-for="project_channels"></div>
+
+							</div>
+						</div>
+
+						<div class="col text-nowrap">
+							<i class="cndce-icon fas fa-code-branch text-primary"></i>
+
+							<div class="d-inline-block">
+								<div><b>Trunk</b></div>
+								<div class="cndce-value" data-for="trunk_id"></div>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div> <!-- jumbotron -->
+
+				
+				<div class="primary-color semi-rounded white-text p-4 mx-4 my-5">
+					<div class="row">
+						<div class="col">
+							<div><b>Response Tracking Question</b></div>
+							<div class="cndce-value" data-for="response-tracking-input"></div>
+						</div>
+
+						<div class="col">
+							<div><b>Intro Audio File</b></div>
+							<div class="cndce-value" data-for="intro-audio-input"></div>
+						</div>
+
+						<div class="col">
+							<div><b>Hangup Audio File</b></div>
+							<div class="cndce-value" data-for="hangup-audio-input"></div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="z-depth-half semi-rounded px-5 py-4">
+					<h3 class="mt-3 mb-5">Questions</h3>
+
+					<div id="cndce-questions-preview-container">
+						<div class="cndce-questions-preview cndce-template my-4">
+							<h4 class="font-weight-bold">#<span class="question-num"></span> <span class="cndce-value" data-for="question-label-input"></span></h4>
+
+							<div class="row">
+								<div class="col">
+									<div class="my-2">
+										<div><b>Question Prompt</b></div>
+										<div class="cndce-value" data-for="question-prompt-input"></div>
+									</div>
+
+									<div class="my-2">
+										<div><b>Audio File</b></div>
+										<div class="cndce-value" data-for="question-audio-input">audio.mpg</div>
+									</div>
+									
+								</div>
+
+								<div class="col">
+									<b>DTMF Keys</b>
+
+									<div class="cndce-dtmf-key-container grey lighten-4 py-3 px-4 semi-rounded">
+										<div class="cndce-dtmf-key row cndce-template">
+											<div class="col-2">
+												<div class="cndce-dtmf-num font-weight-bold"></div>	
+											</div>
+											<div class="col">
+												<span class="cndce-value" data-for="question-answer-input"></span>
+											</div>
+											<div class="col cndce-preview-question-goto-col">
+												Goto <a class="cndce-value text-primary" data-for="question-goto-input">Question 3</a>
+											</div>
+										</div>
+									</div>
+
+									
+								</div>
+							</div>
+
+							<hr>
+						</div>
+					</div> <!-- #questions-preview-container -->
+
+
+					
+
+					
+							
+
+				</div> <!-- jumbotron -->
+
+				
 			</div>
-			
 		</div>
 
 	</div>
@@ -415,9 +610,6 @@
 	<script type="text/javascript" src="./lib/wombat/trunk_chan.js"></script>
 
 	<!-- Self -->
-	<script type="text/javascript">
-		// var CNDCE_TEST_MODE = true;
-	</script>
 	<script type="text/javascript" src="./script.js"></script>
 
 

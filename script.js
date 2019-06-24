@@ -19,6 +19,7 @@ var CNDCE = {};
 
 $(function(){
 	var DATE_FORMAT = 'yyyy-mm-dd';
+	var DTMF_NUMKEYS = [1,2,3,4,5,6,7,8,9,'*',0,'#'];
 
 	var $containerSurvey = $('#cndce-survey-container');
 
@@ -35,6 +36,9 @@ $(function(){
 	var $questionDetailsContainer = $('.cndce-question-details-container', $containerQuestions);
 	var $questionDetailsTemplate = $('.cndce-question-details.cndce-template', $containerQuestions);
 
+	var $questionsPreviewContainer = $('#cndce-questions-preview-container');
+	var $questionsPreviewTemplate = $('.cndce-questions-preview.cndce-template', $questionsPreviewContainer);
+
 	var $inputQuestionNum = $('#question-num-input');
 	var $inputResponseTracking = $('#response-tracking-input');
 	var $inputSurveyCreated = $('#survey-created-input');
@@ -47,8 +51,12 @@ $(function(){
 
 	var $inputFilesDropzone = $('#cndce-files-dropzone');
 
+	var $sliderVolume = $('#volume-slider');
+
 	var $btnGenerateSurvey = $('#cndce-generate-survey-button');
 	var $btnEditQuestions = $('#cndce-edit-questions-button');
+	var $btnPreview = $('#cndce-preview-button');
+	var $btnPreviewBack = $('#cndce-preview-back-button');
 
 	var $btnsFileUpload = $('.cndce-upload-wrapper .cndce-upload-button');
 
@@ -124,6 +132,56 @@ $(function(){
 		}
 	}
 
+	function animateOnce($el, animation){
+		$el.addClass(animation);
+		$el.addClass('animated');
+
+		$el.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+			$el.removeClass(animation);
+		})
+	}
+
+	function validateQuestionDetailsForms(){
+		var $formQuestionDetails = $('.cndce-question-details:not(.cndce-template) form.cndce-question-details-form', $containerQuestions);
+
+		$formQuestionDetails.addClass('was-validated');
+
+		for(var i=0; i < $formQuestionDetails.length; i++){
+			if(!$formQuestionDetails[i].checkValidity()){
+				// Goto Question
+				$formQuestionDetails
+					.eq(i)
+					.parents('.cndce-question-details')
+					.data('$header')
+					.click();
+
+				return CNDCE_TEST_MODE;
+			}
+		}
+
+		return true;
+	}
+
+	function invalidForm($form){
+		var $invalids = $(':invalid', $form);
+
+		$invalids.each(function(){
+			var $invalid = $(this);
+
+			animateOnce($invalid.parents('.md-form'), 'shake');
+		})
+
+		// Scroll to first invalid
+		if($invalids.length > 0){
+			var $scrollbar = $form.parents('.scrollbar');
+			$scrollbar.animate({
+				scrollTop: $invalids.eq(0).offset().top - $scrollbar.offset().top
+			})
+		}
+		
+
+	}
+
 
 	// Solution for MDB bug -___-"
 	// Selected value becomes empty when updated
@@ -169,7 +227,10 @@ $(function(){
 			var $header = $('<div class="cndce-question-header">' + questions[i].name + '</div>');
 			var $details = initQuestionDetail(questions[i], i);
 
+			var $preview = initQuestionPreview(questions[i], i);
+
 			$header.data('$details', $details);
+			$details.data('$header', $header);
 
 			$questionsHeader.append($header);
 
@@ -218,16 +279,40 @@ $(function(){
 	function initQuestionDetail(question, iQuestion){
 		var $details = getTemplate($questionDetailsTemplate);
 
+		// New IDs
+		$('#question-label-input', $details).attr('id', 'question-label-input-' + iQuestion);
+		$('label[for="question-label-input"]', $details).attr('for', 'question-label-input-' + iQuestion);
+
+		$('#question-prompt-input', $details).attr('id', 'question-prompt-input-' + iQuestion);
+		$('label[for="question-prompt-input"]', $details).attr('for', 'question-prompt-input-' + iQuestion);
+
+		$('#question-audio-input', $details).attr('id', 'question-audio-input-' + iQuestion);
+		$('label[for="question-audio-input"]', $details).attr('for', 'question-audio-input-' + iQuestion);
+
+
+
+
+
+		// Initialize numpad
 		var $questionNumContainer = $('.cndce-question-numpad', $details);
 		var $questionNumColTemplate = $('.cndce-question-num-col.cndce-template', $details);
 
-		var numKeys = [1,2,3,4,5,6,7,8,9,'*',0,'#'];
 
-		// Initialize numpad
-		for(var i=0; i < numKeys.length; i++){
+		for(var i=0; i < DTMF_NUMKEYS.length; i++){
 			var $questionNumCol = getTemplate($questionNumColTemplate);
 
-			$('.cndce-num', $questionNumCol).text(numKeys[i]);
+			$('.cndce-num', $questionNumCol).text(DTMF_NUMKEYS[i]);
+
+			// New Numpad IDs
+			$('#question-answer-input', $questionNumCol).attr('id', 'question-answer-input-' + iQuestion + '-' + i);
+			$('label[for="question-answer-input"]', $questionNumCol).attr('for', 'question-answer-input-' + iQuestion + '-' + i);
+
+			$('#question-goto-input', $questionNumCol).attr('id', 'question-goto-input-' + iQuestion + '-' + i);
+			$('label[for="question-goto-input"]', $questionNumCol).attr('for', 'question-goto-input-' + iQuestion + '-' + i);
+
+
+			$questionNumCol.attr('data-id', iQuestion + '-' + i);
+
 
 			$questionNumContainer.append($questionNumCol);
 
@@ -240,14 +325,51 @@ $(function(){
 
 
 		// Initialize select
-		$('.cndce-file-list, .cndce-questions-list', $details).addClass('mdb-select').materialSelect();
+		var $selects = $('.cndce-file-list, .cndce-questions-list', $details)
+		$selects.addClass('mdb-select').materialSelect();
 
-		// $('.mdb-select', $details).materialSelect();
+		$selects.each(function(){
+			initInputSelect($(this));
+		})
 
 
 		return $details;
 	}
 
+	function initQuestionPreview(question, iQuestion){
+		var $preview = getTemplate($questionsPreviewTemplate);
+
+		$('.question-num', $preview).text(iQuestion + 1);
+
+		// Change data-for IDs
+		$('.cndce-value[data-for="question-label-input"]', $preview).attr('data-for', 'question-label-input-' + iQuestion);
+		$('.cndce-value[data-for="question-prompt-input"]', $preview).attr('data-for', 'question-prompt-input-' + iQuestion);
+		$('.cndce-value[data-for="question-audio-input"]', $preview).attr('data-for', 'question-audio-input-' + iQuestion);
+
+
+		// DTMF Keys
+		var $dtmfKeyContainer = $('.cndce-dtmf-key-container', $preview);
+		var $dtmfKeyTemplate = $('.cndce-dtmf-key.cndce-template', $dtmfKeyContainer);
+
+		for(var i=0; i < DTMF_NUMKEYS.length; i++){
+			var $dtmfKey = getTemplate($dtmfKeyTemplate);
+
+			$('.cndce-dtmf-num', $dtmfKey).text(DTMF_NUMKEYS[i]);
+
+			// Change DTMF data-for IDs
+			$('.cndce-value[data-for="question-answer-input"]', $dtmfKey).attr('data-for', 'question-answer-input-' + iQuestion + '-' + i);
+			$('.cndce-value[data-for="question-goto-input"]', $dtmfKey).attr('data-for', 'question-goto-input-' + iQuestion + '-' + i);
+
+			$dtmfKey.attr('data-id', iQuestion + '-' + i);
+
+			$dtmfKeyContainer.append($dtmfKey);
+		}
+
+
+		$questionsPreviewContainer.append($preview);
+
+		return $preview;
+	}
 
 	function initQuestions(){
 		var nQuestions = $inputQuestionNum.val();
@@ -302,7 +424,7 @@ $(function(){
 	})();
 
 	(function initInputVolume(){
-		noUiSlider.create($inputVolume[0], {
+		var volumeSlider = noUiSlider.create($sliderVolume[0], {
 			start: 100, 
 			step: 1,
 			range: {
@@ -316,6 +438,10 @@ $(function(){
 				values: [1,25,50,75,100,125,150,175,200]
 			},
 		});
+
+		volumeSlider.on('update', function(){
+			$inputVolume.val(parseInt(this.get()));
+		})
 	})();
 
 
@@ -364,12 +490,30 @@ $(function(){
 
 	})();
 
-
 	(function testVars(){
 		CNDCE.questions = questions;
 		CNDCE.dropzone = dropzone;
 		CNDCE.files = files;
+
+		CNDCE_TEST_MODE = false;
 	})();
+
+
+	$containerSurvey.on('change', '.cndce-input', function(){
+		var $input = $(this);
+		var $valueDiv = $('.cndce-value[data-for="' + $input.attr('id') + '"]');
+
+		if($input.attr('type') == 'checkbox'){
+			if($input.prop('checked')){
+				$valueDiv.text($input.attr('data-checked-value'));
+			}else{
+				$valueDiv.text($input.attr('data-unchecked-value'));
+			}
+		}else{
+			$valueDiv.text($input.val());
+
+		}
+	})
 
 
 	$inputSurveySkipLogic.change(function(){
@@ -422,7 +566,22 @@ $(function(){
 	})
 
 	$containerQuestions.on('click', '.cndce-question-num', function(e){
-		$(this).toggleClass('active');
+		var $this = $(this);
+		var id = $this.parent().attr('data-id');
+		var $preview = $('.cndce-dtmf-key[data-id="' + id + '"]');
+
+		$this.toggleClass('active');
+		$preview.toggleClass('active');
+
+
+		// Require answer input
+		var $answerInput = $('.question-answer-input', $this);
+		$answerInput.prop('required', $this.hasClass('active'));
+
+
+		// Select answer input
+		$answerInput.focus();
+
 	})
 
 	$containerQuestions.on('click', '.cndce-question-input', function(e){
@@ -430,11 +589,13 @@ $(function(){
 	})
 
 
+
+
 	$btnGenerateSurvey.click(function(){
 
 		$formStartSurvey.addClass('was-validated');
 
-		if($formStartSurvey[0].checkValidity() || CNDCE_TEST_MODE != undefined){
+		if($formStartSurvey[0].checkValidity() || CNDCE_TEST_MODE){
 			$containerStartSurvey.addClass('cndce-collapse');
 			$containerBasicDetails.addClass('cndce-show');
 
@@ -445,6 +606,10 @@ $(function(){
 			$btnsQuestionNum.prop('disabled', true);
 
 			initQuestions();
+		}else{
+			
+			invalidForm($formStartSurvey);
+			animateOnce($btnGenerateSurvey, 'shake');
 		}
 		
 	})
@@ -453,13 +618,44 @@ $(function(){
 
 		$formBasicDetails.addClass('was-validated');
 
-		if($formBasicDetails[0].checkValidity() || CNDCE_TEST_MODE != undefined){
+		if($formBasicDetails[0].checkValidity() || CNDCE_TEST_MODE){
 			$containerBasicDetails.removeClass('cndce-show');
 			$containerBasicDetails.addClass('cndce-collapse');
 			$containerQuestions.addClass('cndce-show');
+		}else{
+			invalidForm($formBasicDetails);
+			animateOnce($btnEditQuestions, 'shake');
 		}
 		
 	})
+
+
+	$btnPreview.click(function(){
+
+		if(	($formStartSurvey[0].checkValidity()
+			&& $formBasicDetails[0].checkValidity()
+			&& validateQuestionDetailsForms()) || CNDCE_TEST_MODE){
+
+			$('.cndce-input').trigger('change');
+
+			$containerSurvey.addClass('cndce-preview');
+		}else{
+
+			invalidForm($formStartSurvey);
+			invalidForm($formBasicDetails);
+			invalidForm($('.cndce-question-details.active form.cndce-question-details-form'));
+			animateOnce($btnPreview, 'shake');
+		}
+
+		
+	})
+
+	$btnPreviewBack.click(function(){
+		$containerSurvey.removeClass('cndce-preview');
+	})
+
+
+	
 
 	$containerBasicDetails.add($inputFilesDropzone).on('dragenter', function(e){
 
@@ -470,10 +666,7 @@ $(function(){
 	$inputFilesDropzone.on('dragleave drop', function(e){
 		$containerBasicDetails.removeClass('dragenter');
 
-	})
-
-
-
+	});
 
 
 })
