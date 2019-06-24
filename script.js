@@ -461,7 +461,7 @@ $(function(){
 		
 	})
 
-	$containerBasicDetails.on('dragenter', function(e){
+	$containerBasicDetails.add($inputFilesDropzone).on('dragenter', function(e){
 
 		$containerBasicDetails.addClass('dragenter');
 
