@@ -219,6 +219,7 @@ background-color: #e2e2e2; }
 .cndce-dropzone .dz-preview .dz-details .dz-filename span{
 	background: none !important;
 	border: none !important;
+	word-break: break-all;
 }
 
 .cndce-dropzone .dz-preview .dz-remove{
